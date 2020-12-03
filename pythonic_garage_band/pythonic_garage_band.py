@@ -5,14 +5,15 @@ class Band(ABC):
 
     list_of_Bands = []
 
-    @classmethod
-    def to_list(cls):
-        return cls.list_of_Bands
-
     def __init__(self, name, members):
       self.name = name
       self.members = members
       Band.list_of_Bands.append(self)
+
+    @classmethod
+    def to_list(cls):
+        return cls.list_of_Bands
+
 
     def play_solos(self):
         list_of_play_solo = []
@@ -32,13 +33,14 @@ class Band(ABC):
 class Musician(Band):
     list_of_Musicians = []
 
+    def __init__(self, name):
+      self.name = name
+
+      Musician.list_of_Musicians.append(self)
+
     @classmethod
     def to_list(cls):
         return cls.list_of_Musicians
-
-    def __init__(self, name):
-      self.name = name
-      Musician.list_of_Musicians.append(self)
 
     @abstractmethod
     def get_instrument(self):
@@ -57,6 +59,10 @@ class Musician(Band):
     
 
 class Guitarist(Musician):
+
+    def __init__(self,name):
+        super().__init__(name)
+
     def get_instrument(self):
         print('Guitar')
 
@@ -64,8 +70,11 @@ class Guitarist(Musician):
         return('face melting guitar solo')
     
 
-
 class Bassist(Musician):
+
+    def __init__(self, name):
+      super().__init__(name)
+
     def get_instrument(self):
         print('Bass')
 
@@ -74,6 +83,10 @@ class Bassist(Musician):
     
 
 class Drummer(Musician):
+
+    def __init__(self,name):
+        super().__init__(name)
+
     def get_instrument(self):
         print('drums')
 
@@ -92,8 +105,3 @@ if __name__ == "__main__":
     print(Band.to_list())
     print(Musician.to_list())
     print(Band1.play_solos())
- 
-
-
-    
-
